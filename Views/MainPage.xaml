@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ContentPage: Page definition, mostly left as default -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiLearningApp.Views.MainPage">
+
+    <!-- ScrollView: Remainder of the default generated page content, but might be usefull when the introduction is populated. -->
+    <ScrollView>
+        
+        <!-- VerticalStack: Overly simplified way to allign all content on the page -->
+        <VerticalStackLayout Spacing="1" Padding="1" VerticalOptions="Center" HorizontalOptions="Center" >
+
+            <!-- Introduction Text  (copy & paste from default text) -->
+            <!-- TODO: Find a good way to display short summary of this app and its intend. -->
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Hello, World!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to .NET Multi-platform App UI"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <!-- HorizontalStack: To allign the 2 main buttons in the "Config" sub-section -->
+            <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center" HorizontalOptions="Center" >
+                
+                <!-- Save Testing: Is a main setting, and should be at the top. -->
+                <Button
+                    x:Name="TestingBtn"
+                    Text="Save Testing"
+                    SemanticProperties.Hint="Enables save to file testing."
+                    Clicked="OnTestingClicked" />
+                
+                <!-- Debug Mode: Is a main setting, and should be at the top. -->
+                <Button
+                    x:Name="DebugBtn"
+                    Text="Debug Mode"
+                    SemanticProperties.Hint="Enables the debug mode, allowing you to costumize where the delay is and if its 1s or 1ms (default)."
+                    Clicked="OnDebugClicked" />
+
+            </HorizontalStackLayout>
+
+            <!-- HorizontalStack to allign the remaining config buttons -->
+            <HorizontalStackLayout Spacing="1" Padding="1" VerticalOptions="Center" HorizontalOptions="Center" >
+
+                <!-- VerticalStack to allign the Time delay buttons -->
+                <VerticalStackLayout Spacing="1" Padding="1" VerticalOptions="Center" HorizontalOptions="Center" >
+
+                    <!-- SecondsBtn: Changes the overall delay from 1ms to 1s. -->
+                    <Button
+                        x:Name="SecondsBtn"
+                        Text="Seconds Delay"
+                        SemanticProperties.Hint="Changes the overall delay from 1ms to 1s."
+                        Clicked="OnSecondsClicked" />
+
+                    <!-- MinutesBtn: Moves the overall delay from each second to each minute. -->
+                    <Button
+                        x:Name="MinutesBtn"
+                        Text="Delay on Minutes"
+                        SemanticProperties.Hint="Moves the overall delay from each second to each minute."
+                        Clicked="OnMinutesClicked" />
+
+                    <!-- HoursBtn: Moves the overall delay from each second to each hour. -->
+                    <Button
+                        x:Name="HoursBtn"
+                        Text="Delay on Hours"
+                        SemanticProperties.Hint="Moves the overall delay from each second to each hours."
+                        Clicked="OnHoursClicked" />
+
+                </VerticalStackLayout>
+
+                <!-- VerticalStack to allign the Date delay buttons -->
+                <VerticalStackLayout Spacing="1" Padding="1" VerticalOptions="Center" HorizontalOptions="Center" >
+
+                    <!-- DaysBtn: Moves the overall delay from each second to each day. -->
+                    <Button
+                        x:Name="DaysBtn"
+                        Text="Delay on Days"
+                        SemanticProperties.Hint="Moves the delay from each counted Second to each counted Day."
+                        Clicked="OnDaysClicked" />
+
+                    <!-- MonthsBtn: Moves the overall delay from each second to each month. -->
+                    <Button
+                        x:Name="MonthsBtn"
+                        Text="Delay on Months"
+                        SemanticProperties.Hint="Moves the delay from each counted Second to each counted Month."
+                        Clicked="OnMonthsClicked" />
+
+                    <!-- YearsBtn: Moves the overall delay from each second to each year. -->
+                    <Button
+                        x:Name="YearsBtn"
+                        Text="Delay on Years"
+                        SemanticProperties.Hint="Moves the delay from each counted Second to each counted Year."
+                        Clicked="OnYearsClicked" />
+
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <!-- HorizontalStack to allign the Navigation Buttons at the bottom -->
+            <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center" HorizontalOptions="Center" >
+                
+                <!-- Clock Navigation Button -->
+                <Button
+                    x:Name="ClockBtn"
+                    Text="Clock"
+                    SemanticProperties.Hint="Navigates to the Clock View"
+                    Clicked="OnClockClicked" />
+
+                <!-- Clock Navigation Button -->
+                <Button
+                    x:Name="CalenderBtn"
+                    Text="Calender"
+                    SemanticProperties.Hint="Navigates to the Calender View"
+                    Clicked="OnCalenderClicked" />
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+
+</ContentPage>

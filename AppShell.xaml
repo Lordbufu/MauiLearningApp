@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiLearningApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiLearningApp.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Clock"
+        ContentTemplate="{DataTemplate local:ClockPage}"
+        Route="ClockPage" />
+
+    <ShellContent
+        Title="Calender"
+        ContentTemplate="{DataTemplate local:CalenderPage}"
+        Route="CalenderPage" />
+
+</Shell>
