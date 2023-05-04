@@ -1,101 +1,67 @@
-﻿namespace MauiLearningApp.Views
+﻿using MauiLearningApp.ViewModels;
+using MauiLearningApp.Models;
+
+namespace MauiLearningApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        internal static bool IsInit { get; set; }                       // App state to indicate if the MainPage finished its initial configurations.
-        internal static bool IsCounting { get; set; }                   // App state to indicate if the Counting process is active or not.
-        internal static bool IsPaused { get; set; }                     // App state to indicate if the Counting process is paused or not.
-        internal static bool IsReset { get; set; }                      // App state to indicate if the Counting process was reset during the IsPaused state.
+        /*  MainPage Constructor:
+                Normaly in a simple MVVM this entire class should be basically empty.
+                But since this is new to me, and because MAUI is fairly new, i did have to create a few workarounds for my design.
+                
+                I opted to create my own Initialization process, so i can set some default values, to ensure the correct logic behavior.
+                There are likely better ways to achieve the same goal, but again im just messing around trying to learn the basics.
 
-        internal static bool IsTesting { get; set; }                    // App main config, to enable save to file testing.
-        internal static bool IsDebug { get; set; }                      // App main config, to enable the Debug mode.
-        internal static bool IsSeconds { get; set; }                    // App main config, to change the default 1ms delay to 1s.
-        internal static bool IsMinutes { get; set; }                    // App main config, to move the delay to minutes instead of seconds.
-        internal static bool IsHours { get; set; }                      // App main config, to move the delay to hours instead of seconds.
-        internal static bool IsDays { get; set; }                       // App main config, to move the delay to days instead of seconds.
-        internal static bool IsMonths { get; set; }                     // App main config, to move the delay to months instead of seconds.
-        internal static bool IsYears { get; set; }                      // App main config, to move the delay to years instead seconds.
+                As the Framework and my skill-set grows, i might end up reworking some of this, but for now it seems to work as expected/desired.
 
+                IsInit code block:
+                    Here i set the main App states as defined in the MainPageModel, they all default to false.
+                    Because i can't bind Toggled events, or attach Commands, i have to set them to there Definition in the MainPageViewModel.
+                    The same goes for the Clicked events, though i could have opted to use Commands in this case.
+                    And to finalize the process, i have to switch the IsInit state, otherwhise things would keep being fired during page navigation ?
+        */
         public MainPage()
 		{
 			InitializeComponent();
+
+            // Check the IsInit state, so we don't reset values when not expected.
+            if (!MainPageModel.IsInit)
+            {
+                MainPageModel.IsCounting = false;
+                MainPageModel.IsPaused = false;
+                MainPageModel.IsReset = false;
+                MainPageModel.IsTesting = false;
+                MainPageModel.IsDebug = false;
+                MainPageModel.IsSeconds = false;
+                MainPageModel.IsMinutes = false;
+                MainPageModel.IsHours = false;
+                MainPageModel.IsDays = false;
+                MainPageModel.IsMonths = false;
+                MainPageModel.IsYears = false;
+
+                TestingSwitch.Toggled += MainPageViewModel.TestingSwitch_Toggled;
+                DebugSwitch.Toggled += MainPageViewModel.DebugSwitch_Toggled;
+                SecondsSwitch.Toggled += MainPageViewModel.SecondsSwitch_Toggled;
+                MinutesSwitch.Toggled += MainPageViewModel.MinutesSwitch_Toggled;
+                HoursSwitch.Toggled += MainPageViewModel.HoursSwitch_Toggled;
+                DaysSwitch.Toggled += MainPageViewModel.DaysSwitch_Toggled;
+                MonthsSwitch.Toggled += MainPageViewModel.MonthsSwitch_Toggled;
+                YearsSwitch.Toggled += MainPageViewModel.YearsSwitch_Toggled;
+
+                ClockButton.Clicked += MainPageViewModel.OnClockButton_Clicked;
+                CalenderButton.Clicked += MainPageViewModel.OnCalenderButton_Clicked;
+
+                MainPageModel.IsInit = true;
+            }
 		}
 
-        // Testing state button.
-        private void OnTestingClicked(object sender, EventArgs e)
-        {
-            // Change IsTesting state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
+        /*  Code: Reminder Snippets (To be removed later, needed a place to collect a few reminders)
+                
+                Print to console for debug reasons (can also be used in Tasks with await):
+                    Debug.WriteLine(parameter);
 
-        // Debug state button.
-        private void OnDebugClicked(object sender, EventArgs e)
-        {
-            // Change IsDebug state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        // Seconds delay button.
-        private void OnSecondsClicked(object sender, EventArgs e)
-        {
-            // Change IsSeconds state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        // Minutes delay button.
-        private void OnMinutesClicked(object sender, EventArgs e)
-        {
-            // Change IsMinutes state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        // Hours delay button.
-        private void OnHoursClicked(object sender, EventArgs e)
-        {
-            // Change IsHours state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        // Days delay button.
-        private void OnDaysClicked(object sender, EventArgs e)
-        {
-            // Change IsDays state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        // Months delay button.
-        private void OnMonthsClicked(object sender, EventArgs e)
-        {
-            // Change IsMonths state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        // Years delay button.
-        private void OnYearsClicked(object sender, EventArgs e)
-        {
-            // Change IsYears state variable to "true" or "false" based on the current value.
-            // Change button color to red or green based on the variable its state ?
-        }
-
-        /* Page Navigation:
-            Due to a lack of experience, and there for documentation that makes sense to me, i settled on Shell Navigation.
-            This was easy to attach to a onclick Button event, and allows me to define where and how the buttons are displayed.
-            There are various other ways to achieve the same end goal, but this seems to fit my simple design the best.
-        
-            OnClockClicked:
-                The onclicked event for the ClockBtn.
-
-            OnCalenderClicked:
-                The onclicked event for the CalenderBtn.
+                Change label text to x or y based on true of false variable evaluation:
+                    Label.Text = Testing ? y : x;
          */
-        private async void OnClockClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("app://MauiLearningApp.Views/ClockPage");
-        }
-
-        private async void OnCalenderClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("app://MauiLearningApp.Views/CalenderPage");
-        }
     }
 }
