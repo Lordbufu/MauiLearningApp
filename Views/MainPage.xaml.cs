@@ -1,61 +1,41 @@
 ﻿using MauiLearningApp.ViewModels;
-using MauiLearningApp.Models;
 
 namespace MauiLearningApp.Views
 {
+    /*  MainPage:
+            I wanted to take the most easy route, so i can learn things at my own speed.
+            Also designs are not my strongest skill, so i do struggle to make things look nice in the UI.
+            Somethings can likely be improved using a Toolkit, but i would rather avoid using that untill i grasp the basics a bit more.
+     */
     public partial class MainPage : ContentPage
     {
-        /*  MainPage Constructor:
-                Normaly in a simple MVVM this entire class should be basically empty.
-                But since this is new to me, and because MAUI is fairly new, i did have to create a few workarounds for my design.
-                
-                I opted to create my own Initialization process, so i can set some default values, to ensure the correct logic behavior.
-                There are likely better ways to achieve the same goal, but again im just messing around trying to learn the basics.
+        // The App Init state: Only used in this class, so i left it out of the MVVM design concept (false by default).
+        private static bool IsInit { get; set; } = false;
 
-                As the Framework and my skill-set grows, i might end up reworking some of this, but for now it seems to work as expected/desired.
-
-                IsInit code block:
-                    Here i set the main App states as defined in the MainPageModel, they all default to false.
-                    Because i can't bind Toggled events, or attach Commands, i have to set them to there Definition in the MainPageViewModel.
-                    The same goes for the Clicked events, though i could have opted to use Commands in this case.
-                    And to finalize the process, i have to switch the IsInit state, otherwhise things would keep being fired during page navigation ?
-        */
+        // MainPage Constructor: Includes a basic initialization code block, to bind a event to the switches i used.
         public MainPage()
 		{
 			InitializeComponent();
 
-            // Check the IsInit state, so we don't reset values when not expected.
-            if (!MainPageModel.IsInit)
+            if (!IsInit)
             {
-                MainPageModel.IsCounting = false;
-                MainPageModel.IsPaused = false;
-                MainPageModel.IsReset = false;
-                MainPageModel.IsTesting = false;
-                MainPageModel.IsDebug = false;
-                MainPageModel.IsSeconds = false;
-                MainPageModel.IsMinutes = false;
-                MainPageModel.IsHours = false;
-                MainPageModel.IsDays = false;
-                MainPageModel.IsMonths = false;
-                MainPageModel.IsYears = false;
+                TestingSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                DebugSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                SecondsSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                MinutesSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                HoursSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                DaysSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                MonthsSwitch.Toggled += MainPageViewModel.Switch_Toggled;
+                YearsSwitch.Toggled += MainPageViewModel.Switch_Toggled;
 
-                TestingSwitch.Toggled += MainPageViewModel.TestingSwitch_Toggled;
-                DebugSwitch.Toggled += MainPageViewModel.DebugSwitch_Toggled;
-                SecondsSwitch.Toggled += MainPageViewModel.SecondsSwitch_Toggled;
-                MinutesSwitch.Toggled += MainPageViewModel.MinutesSwitch_Toggled;
-                HoursSwitch.Toggled += MainPageViewModel.HoursSwitch_Toggled;
-                DaysSwitch.Toggled += MainPageViewModel.DaysSwitch_Toggled;
-                MonthsSwitch.Toggled += MainPageViewModel.MonthsSwitch_Toggled;
-                YearsSwitch.Toggled += MainPageViewModel.YearsSwitch_Toggled;
-
-                ClockButton.Clicked += MainPageViewModel.OnClockButton_Clicked;
-                CalenderButton.Clicked += MainPageViewModel.OnCalenderButton_Clicked;
-
-                MainPageModel.IsInit = true;
+                IsInit = true;
             }
 		}
 
-        /*  Code: Reminder Snippets (To be removed later, needed a place to collect a few reminders)
+        /*  Reminder Code Snippets: (To be removed later, needed a place to collect a few reminders/learning reminders)
+                
+                To use functions from 'System.Diagnostics', and not cause conflicts with MAUI stuff, its best to use it like this:
+                    System.Diagnostics.Debug.WriteLine("Test");
                 
                 Print to console for debug reasons (can also be used in Tasks with await):
                     Debug.WriteLine(parameter);

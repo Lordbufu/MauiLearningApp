@@ -1,50 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--    MainPage Design:
+            I am not a designer, meaning there are like plenty of other ways to make this look a lot nicer, like a grid layouts for example.
+            But i do need something visual to represent my code project, so i ended up doing it in a very 'dirty' way that work for me.
+            I also opted to use C# for most of this, but then i would not really learn how to bind things to xaml elements etc.
+
+            There are a few things that are not working\designed as intended:
+                - StackLayouts:
+                    I created a hot mess of StackLayouts, so i could center\position things, without having to create a grid layout.
+                - Labels for spacing:
+                    There are several Labels, used for nothing but spacing between certain sections, so it looks a bit more proffesional.
+                - Labels for Text:
+                    The introduction\explanation could have been improved, using a single label for each, and using WordWrap.
+                    But since i opted not to use a grid, its going to look very ugly, much like the Welcome text.
+                - Switch centering:
+                    The switches i used for the App Settings, don't seem to allign properly with the content, while the buttons do.
+                    This is related to: https://github.com/dotnet/maui/issues/6177
+                    I can not solve this without doing more work then i would like to, so im leaving it as is for now.
+-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mpvm="clr-namespace:MauiLearningApp.ViewModels"
              x:Class="MauiLearningApp.Views.MainPage"
              Title="Main Page" >
+    
     <ContentPage.BindingContext>
         <mpvm:MainPageViewModel />
     </ContentPage.BindingContext>
 
-    <!-- ScrollView: Remainder of the default generated page content, but i saw no need to change it. -->
     <ScrollView>
-        <!-- VerticalStack: Overly simplified way to allign all content on the page -->
+        <!-- Welcome & Explanation Section -->
         <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
 
-            <!-- Introduction Text  (copy & paste from default text) -->
-            <!-- TODO: Find a good way to display short summary of this app and its intend. -->
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="200"
+            <Label
+                Text="{Binding WelcomeText}"
+                FontSize="24"
+                HorizontalOptions="Center" />
+
+            <Label Text="" FontSize="16" />
+
+            <Label
+                Text="{Binding ExplanationText_1}"
+                FontSize="16"
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Hello, World!"
-                FontSize="32"
+                Text="{Binding ExplanationText_2}"
+                FontSize="16"
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                FontSize="18"
+                Text="{Binding ExplanationText_3}"
+                FontSize="16"
                 HorizontalOptions="Center" />
 
-            <!-- Later i realized, that ScrollView was likely not the best choice, as i needed some visual spacing here -->
-            <Label Text="" FontSize="32" />
-
-            <!-- Main Config Setting Switches Section -->
             <Label
-                Text="Main App Setting"
+                Text="{Binding ExplanationText_4}"
+                FontSize="16"
+                HorizontalOptions="Center" />
+
+            <Label Text="" FontSize="16" />
+            
+            <!-- Main App Settings Section -->
+            <Label
+                Text="Main App Setting:"
                 TextColor="{Binding HeaderColor}"
                 FontSize="24"
                 HorizontalOptions="Center" />
 
-            <!-- Create a new Horizontal/Vertical stack to allign the Main App Settings switches. -->
-            <!-- Can't quite seem to center the switches properly, related to https://github.com/dotnet/maui/issues/6177. -->
-            <!-- Unless they allow access to OnContent and OffContent, i can not change this on Windows, not even with a grid layout -->
-            <HorizontalStackLayout>
-                <!-- Testing Switch and Label -->
+            <Label Text="" FontSize="8" />
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
                 <VerticalStackLayout>
                     <Label
                         Text="Save testing"
@@ -54,7 +79,7 @@
                         OnColor="{Binding SwitchBackColor}"
                         ThumbColor="{Binding SwitchKnobColor}" />
                 </VerticalStackLayout>
-                <!-- Debug Delay Switch and Label -->
+                
                 <VerticalStackLayout>
                     <Label
                         Text="Enable delay settings"
@@ -66,41 +91,41 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
-
-            <!-- Config Setting Switches Section -->
+            <!-- App Delay Settings Section -->
             <Label
-                Text="App Delay Setting"
+                Text="App Delay Setting:"
                 TextColor="{Binding HeaderColor}"
-                FontSize="24"
+                FontSize="22"
                 HorizontalOptions="Center" />
 
-            <!-- Create a new Horizontal/Vertical stack to allign the time delay switches. -->
-            <HorizontalStackLayout>
+            <Label Text="" FontSize="8" />
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
                 <VerticalStackLayout>
-                    <!-- Seconds Delay Switch and Label -->
+                    
                     <VerticalStackLayout>
                         <Label
-                            Text="Enable 1s Delay"
+                            Text="Enable 1ms Delay"
                             VerticalOptions="Center" />
                         <Switch
                             x:Name="SecondsSwitch"
                             OnColor="{Binding SwitchBackColor}"
                             ThumbColor="{Binding SwitchKnobColor}" />
                     </VerticalStackLayout>
-                    <!-- Minutes Delay Switch and Label -->
+                    
                     <VerticalStackLayout>
                         <Label
-                            Text="Move delay to Minutes"
+                            Text="Move to Minutes"
                             VerticalOptions="Center" />
                         <Switch
                             x:Name="MinutesSwitch"
                             OnColor="{Binding SwitchBackColor}"
                             ThumbColor="{Binding SwitchKnobColor}" />
                     </VerticalStackLayout>
-                    <!-- Hours Delay Switch and Label -->
+                    
                     <VerticalStackLayout>
                         <Label
-                            Text="Move delay to Minutes"
+                            Text="Move to Hours"
                             VerticalOptions="Center" />
                         <Switch
                             x:Name="HoursSwitch"
@@ -108,33 +133,31 @@
                             ThumbColor="{Binding SwitchKnobColor}" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
-                <!-- VerticalStack to allign the Date delay buttons -->
-                <VerticalStackLayout Spacing="1" Padding="1" VerticalOptions="Center" HorizontalOptions="Center" >
-                    <!-- Days Delay Switch and Label -->
+
+                <VerticalStackLayout>
                     <VerticalStackLayout>
                         <Label
-                            Text="Move delay to Minutes"
+                            Text="Move to Days"
                             VerticalOptions="Center" />
                         <Switch
                             x:Name="DaysSwitch"
                             OnColor="{Binding SwitchBackColor}"
                             ThumbColor="{Binding SwitchKnobColor}" />
                     </VerticalStackLayout>
-                    <!-- Months Delay Switch and Label -->
+
                     <VerticalStackLayout>
                         <Label
-                            x:Name="MonthsLabel"
-                            Text="Move delay to Minutes"
+                            Text="Move to Months"
                             VerticalOptions="Center" />
                         <Switch
                             x:Name="MonthsSwitch"
                             OnColor="{Binding SwitchBackColor}"
                             ThumbColor="{Binding SwitchKnobColor}" />
                     </VerticalStackLayout>
-                    <!-- Years Delay Switch and Label -->
+
                     <VerticalStackLayout>
                         <Label
-                            Text="Move delay to Minutes"
+                            Text="Move to Years"
                             VerticalOptions="Center" />
                         <Switch
                             x:Name="YearsSwitch"
@@ -144,18 +167,27 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
-            <!-- HorizontalStack to allign the Navigation Buttons at the bottom -->
-            <HorizontalStackLayout Spacing="1" Padding="1" VerticalOptions="Center" HorizontalOptions="Center" >
-                <!-- Clock Navigation Button -->
+            <!-- Navigation Buttons Section -->
+            <Label
+                Text="Navigation Buttons:"
+                TextColor="{Binding HeaderColor}"
+                FontSize="24"
+                HorizontalOptions="Center" />
+
+            <Label Text="" FontSize="8" />
+
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+
                 <Button
                     x:Name="ClockButton"
-                    Text="Clock" />
-                <!-- Clock Navigation Button -->
+                    Text="Clock"
+                    Command="{Binding ClockButtonCom}" />
+
                 <Button
                     x:Name="CalenderButton"
-                    Text="Calender" />
+                    Text="Calender"
+                    Command="{Binding CalenderButtonCom}"/>
             </HorizontalStackLayout>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
