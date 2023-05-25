@@ -1,23 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiLearningApp.ViewModels"
              x:Class="MauiLearningApp.Views.ClockPage"
-             Title="ClockPage">
-    
-    <VerticalStackLayout>
-        
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Clock Page">
 
-        <!-- Back Navigation Button: Temp addition to see how this all works. -->
-        <Button
-            x:Name="BackBtn"
-            Text="Main Page"
-            SemanticProperties.Hint="Goes back to the main page."
-            Clicked="OnBackClicked" />
+    <ContentPage.BindingContext>
+        <vm:ClockPageViewModel />
+    </ContentPage.BindingContext>
+
+    <!-- Vertical stack to position the main content -->
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+        <!-- Time & Date Label -->
+        <Label x:Name="TimeLabel"
+               Text="{Binding TimeLabelText}"
+               FontSize="32"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+        
+        <Label Text="{Binding DateLabelText}"
+               FontSize="32"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+
+        <!-- Extra little fake label for spacing -->
+        <Label Text="" FontSize="18" />
+
+        <!-- Horizontal stack to position the controlle buttons within the main content -->
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+            <!-- Controlle Buttons -->
+            <Button Text="{Binding StartResumeButtText}"
+                    Command="{Binding StartResumeButtCom}"
+                    WidthRequest="90" />
+            
+            <Button Text="{Binding PauseResetButtText}"
+                    Command="{Binding PauseResetButtCom}"
+                    WidthRequest="90" />
+        </HorizontalStackLayout>
+
+        <!-- Extra little fake label for spacing -->
+        <Label Text="" FontSize="2" />
+
+        <!-- Horizontal stack to position the navigation button within the main content -->
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+            <!-- Navigation Buttons -->
+            <Button Text="Back"
+                    Command="{Binding NavBackButtonCom}"
+                    WidthRequest="90" />
+            
+            <Button Text="Calender"
+                    Command="{Binding NavCalButtonCom}"
+                    WidthRequest="90" />
+        </HorizontalStackLayout>
 
     </VerticalStackLayout>
-    
 </ContentPage>

@@ -19,42 +19,16 @@ namespace MauiLearningApp.ViewModels
     public class MainPageViewModel : ContentView
     {
         // Bound Color Properties: The most basic property binding, that i could get to work as i intended.
-        public Color HeaderColor
-        {
-            get => Colors.DarkRed;
-        }
-
-        public Color SwitchKnobColor
-        {
-            get => Colors.Green;
-        }
-
-        public Color SwitchBackColor
-        {
-            get => Colors.LightSkyBlue;
-        }
+        public Color HeaderColor { get => Colors.DarkRed; }
+        public Color SwitchKnobColor { get => Colors.Green; }
+        public Color SwitchBackColor { get => Colors.LightSkyBlue; }
 
         // Bound Text Properties: A slightly more complex setup, to display some welcome and explanation text.
-        public string WelcomeText
-        {
-            get => GetWelcomeText();
-        }
-        public string ExplanationText_1
-        {
-            get => GetExplanationText();
-        }
-        public string ExplanationText_2
-        {
-            get => GetExplanationText();
-        }
-        public string ExplanationText_3
-        {
-            get => GetExplanationText();
-        }
-        public string ExplanationText_4
-        {
-            get => GetExplanationText();
-        }
+        public string WelcomeText { get => GetWelcomeText(); }
+        public string ExplanationText_1 { get => GetExplanationText(); }
+        public string ExplanationText_2 { get => GetExplanationText(); }
+        public string ExplanationText_3 { get => GetExplanationText(); }
+        public string ExplanationText_4 { get => GetExplanationText(); }
 
         // Bound ICommands: Use Shell Navigation to navigate pages, don't need to make things overly complex.
         public ICommand ClockButtonCom
@@ -80,7 +54,7 @@ namespace MauiLearningApp.ViewModels
                 Each time a switch is Toggled, i want to set the new 'Value' to the associated App State Variable, and seem to be retained when navigating.
                 The 'x:Name' is stored as 'StyleId' in the 'Element' class, but can't be directly accessed via the 'sender' object.
 
-                First i set the 'sender' object as the 'Switch' class to a new 'obj' variable ? (other solutions use some kind of type casting)
+                First i set the 'sender' object as the 'Switch' class to a new 'obj' instance ? (other solutions use some kind of type casting)
                 Then i can access the 'StyleId', and evaluate that in a switch statement using the 'StyleId'.
                 The new 'IsToggled' value is passed along via the 'ToggledEventArgs', making it easy to assign that to the variable i want.
                 
@@ -139,26 +113,11 @@ namespace MauiLearningApp.ViewModels
             var String_4 = "Meaning you can pick both Main Settings, and then either move the delay, or shorten the delay and move it.";
             var Failed = "Something went wrong, and the Text was lost in the void.";
 
-            if (property == "ExplanationText_1")
-            {
-                return String_1;
-            }
-            else if (property == "ExplanationText_2")
-            {
-                return String_2;
-            }
-            else if (property == "ExplanationText_3")
-            {
-                return String_3;
-            }
-            else if (property == "ExplanationText_4")
-            {
-                return String_4;
-            }
-            else
-            {
-                return Failed;
-            }
+            if (property == "ExplanationText_1") { return String_1; }
+            else if (property == "ExplanationText_2") { return String_2; }
+            else if (property == "ExplanationText_3") { return String_3; }
+            else if (property == "ExplanationText_4") { return String_4; }
+            else { return Failed; }
         }
     }
 }

@@ -8,23 +8,23 @@
                 - StackLayouts:
                     I created a hot mess of StackLayouts, so i could center\position things, without having to create a grid layout.
                 - Labels for spacing:
-                    There are several Labels, used for nothing but spacing between certain sections, so it looks a bit more proffesional.
+                    There are several Labels, used for nothing but spacing between certain sections, so it looks a bit more 'proffesional'.
                 - Labels for Text:
                     The introduction\explanation could have been improved, using a single label for each, and using WordWrap.
                     But since i opted not to use a grid, its going to look very ugly, much like the Welcome text.
                 - Switch centering:
                     The switches i used for the App Settings, don't seem to allign properly with the content, while the buttons do.
                     This is related to: https://github.com/dotnet/maui/issues/6177
-                    I can not solve this without doing more work then i would like to, so im leaving it as is for now.
+                    I can not solve this without doing more work then i would like to, so im leaving it as is for now, even a grid would not help in this case.
 -->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mpvm="clr-namespace:MauiLearningApp.ViewModels"
+             xmlns:vm="clr-namespace:MauiLearningApp.ViewModels"
              x:Class="MauiLearningApp.Views.MainPage"
              Title="Main Page" >
     
     <ContentPage.BindingContext>
-        <mpvm:MainPageViewModel />
+        <vm:MainPageViewModel />
     </ContentPage.BindingContext>
 
     <ScrollView>
@@ -186,7 +186,7 @@
                 <Button
                     x:Name="CalenderButton"
                     Text="Calender"
-                    Command="{Binding CalenderButtonCom}"/>
+                    Command="{Binding CalenderButtonCom}" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

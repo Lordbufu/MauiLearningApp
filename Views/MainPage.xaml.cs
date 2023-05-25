@@ -9,10 +9,10 @@ namespace MauiLearningApp.Views
      */
     public partial class MainPage : ContentPage
     {
-        // The App Init state: Only used in this class, so i left it out of the MVVM design concept (false by default).
+        // The App Init state: Only used because i can't bind commands to switches via xaml.
         private static bool IsInit { get; set; } = false;
 
-        // MainPage Constructor: Includes a basic initialization code block, to bind a event to the switches i used.
+        // MainPage Constructor: Includes a basic initialization code block, to link a toggled event to the switches i used.
         public MainPage()
 		{
 			InitializeComponent();
@@ -42,6 +42,17 @@ namespace MauiLearningApp.Views
 
                 Change label text to x or y based on true of false variable evaluation:
                     Label.Text = Testing ? y : x;
+
+                Create a simple costum event, without using the build in EventArgs class:
+                    Declare event:
+                        public event Action<string> TestEvent;
+                    Create handler (should work with [CallerMemberName] if required):
+                        private void TestEventHandler(string propertyName) { }
+                    Connect event to handler in the class constructor:
+                        TestEvent += new Action<string>(TestEventHandler);
+                    Unsub and/or clear all events:
+                        TestEvent += TestEventHandler;
+                        TestEvent = null;
          */
     }
 }

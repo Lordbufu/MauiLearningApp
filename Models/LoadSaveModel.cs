@@ -3,12 +3,8 @@
         - Review the code and ensure this is the final version of what i want, if not add the remaining desired functionality.
         - Add Comments in places where i could (or would have wanted) to add functionality, that i ended up not adding because of reasons.
  */
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MauiLearningApp.Models
 {

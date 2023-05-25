@@ -10,7 +10,7 @@ namespace MauiLearningApp.Models
     // MainPageModel: There isn't much to this atm, only a few states i needed to store, so i could use them in ViewModels to direct logic behavior.
     class MainPageModel
     {
-        // Main App States, set to false by false.
+        // Main App States, set to false by default, static so its shared between instances.
         internal static bool IsCounting { get; set; } = false;
         internal static bool IsPaused { get; set; } = false;
         internal static bool IsReset { get; set; } = false;
